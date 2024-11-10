@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Carrusel from '../Components/Home/Carrusel';
 import Recommendations from '../Components/Home/Recommendations';
 import Questions from '../Components/Home/Questions';
+import { List } from '@material-tailwind/react';
+import ListaCarrito from '../Components/Home/ListaCarrito';
 
 const AboutUs = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -17,6 +19,8 @@ const AboutUs = () => {
 
   return (
     <main className="mt-20">
+      <ListaCarrito />
+  
       <section className="mt-20">
         <Carrusel />
       </section>

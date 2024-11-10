@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import Carrito from '../Components/Home/Carrito'
+import ListaCarrito from '../Components/Home/ListaCarrito';
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -11,8 +13,10 @@ const Header = () => {
   const closeMenu = () => {
     setActiveMenu(null);
   };
+  const cuenta = false;
 
   return (
+    <>
     <header className="fixed top-0 left-0 w-full bg-black shadow-lg flex items-center justify-between px-8 py-4 z-50">
       <h1 className="text-2xl font-bold text-white">
         <Link to="/" className="hover:text-cyan-400 transition duration-200">Technology+</Link>
@@ -21,7 +25,7 @@ const Header = () => {
       <nav className="nav font-semibold text-lg text-white">
         <ul className="flex items-center space-x-8">
           <li className="relative group">
-            <Link to="/" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sobre Nosotros</Link>
+            <Link to="/home" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sobre Nosotros</Link>
           </li>
 
           {/* Productos con menú desplegable */}
@@ -38,35 +42,47 @@ const Header = () => {
             {activeMenu === 'productos' && (
               <ul className="absolute top-12 left-0 bg-white text-black rounded-lg shadow-lg py-2 w-48 space-y-2 transition duration-300 transform translate-y-2 group-hover:translate-y-0">
                 <li className="hover:bg-gray-100 px-4 py-2 rounded-md">
-                  <Link to="/computacion" onClick={closeMenu}>Laptops</Link>
+                  <Link to="/home/productos/computacion" onClick={closeMenu}>Laptops</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2 rounded-md">
-                  <Link to="/phones" onClick={closeMenu}>Telefonos</Link>
+                  <Link to="/home/productos/phones" onClick={closeMenu}>Telefonos</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2 rounded-md">
-                  <Link to="/gaming" onClick={closeMenu}>Gaming</Link>
+                  <Link to="/home/productos/gaming" onClick={closeMenu}>Gaming</Link>
                 </li>
                 <li className="hover:bg-gray-100 px-4 py-2 rounded-md">
-                  <Link to="/pc" onClick={closeMenu}>PC Components</Link>
+                  <Link to="/home/productos/pc" onClick={closeMenu}>PC Components</Link>
                 </li>
               </ul>
             )}
           </li>
           <li className="relative group">
-            <Link to="/sedes" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sedes</Link>
+            <Link to="/home/sedes" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Sedes</Link>
           </li>
           <li className="relative group">
-            <Link to="/contactanos" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Contáctanos</Link>
+            <Link to="/home/contactanos" className="hover:text-cyan-400 transition duration-200" onClick={closeMenu}>Contáctanos</Link>
           </li>
         </ul>
       </nav>
+      {
+        cuenta ? (
+          <div className="flex items-center space-x-4">
+            <Link to="/login" className="text-white hover:bg-cyan-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2">
+              Log in
+            </Link>
+          </div>
+        ) : (
+          <div className="flex items-center space-x-4">
+            <Carrito />
+          </div>
+        )}
 
-      <div className="flex items-center space-x-4">
-        <Link to="/login" className="text-white hover:bg-cyan-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2">
-          Log in
-        </Link>
-      </div>
+      
+
+      
     </header>
+    </>
+    
   );
 };
 

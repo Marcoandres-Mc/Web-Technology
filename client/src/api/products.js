@@ -11,6 +11,16 @@ export const getProductsLaptos = async () => {
     return [];
   }
 };
+export const getProduct = async (id) => {
+  try {
+    const response = await axios.get(`${API}/product/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return [];
+  }
+}
+
 
 export const getProductsCelulares = async () => {
   try {
