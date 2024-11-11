@@ -5,20 +5,26 @@ import Register from './pages/Register';
 
 
 import Home from './Home'
+import { AuthProvider } from './Contexts/AuthContext';
+import { CarritoProvider } from './Contexts/CarritoContext';
 
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home/*" element={
-          <Home />
-          }/>
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <CarritoProvider>  
+        <Router>
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home/*" element={
+              <Home />
+              }/>
+          </Routes>
+        </Router>
+      </CarritoProvider> 
+    </AuthProvider>
   );
 };
 

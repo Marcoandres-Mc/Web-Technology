@@ -19,8 +19,6 @@ const AboutUs = () => {
 
   return (
     <main className="mt-20">
-      <ListaCarrito />
-  
       <section className="mt-20">
         <Carrusel />
       </section>

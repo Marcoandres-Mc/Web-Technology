@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {CarritoContext} from '../../Contexts/CarritoContext';
 
 const DetallesProducto = () => {
 
@@ -20,8 +21,12 @@ const DetallesProducto = () => {
             setQuantity(quantity - 1);
         }
     };
-    
 
+    const { agregarAlCarrito } = useContext(CarritoContext);
+    
+    const btnAgregar = () => {
+        agregarAlCarrito({ id, nombre, descripcion, precio, img: decodedImg, cantidad: quantity });
+    }
     
 
 
@@ -40,7 +45,7 @@ const DetallesProducto = () => {
                     <div>
                         <h2 className="text-2xl font-bold text-gray-800">{nombre}</h2>
                         <p className="text-gray-600 mt-2">{descripcion}</p>
-                        <p className="text-xl font-semibold text-green-500 mt-4">{precio}</p>
+                        <p className="text-xl font-semibold text-green-500 mt-4">{"S/."+ precio}</p>
                     </div>
 
     
@@ -48,7 +53,7 @@ const DetallesProducto = () => {
                         <button onClick={decreaseQuantity} className="px-3 py-1 bg-gray-300 text-gray-800 rounded-l">-</button>
                         <span className="px-4 py-1 border-t border-b">{quantity}</span>
                         <button onClick={increaseQuantity} className="px-3 py-1 bg-gray-300 text-gray-800 rounded-r">+</button>
-                        <button className="ml-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        <button onClick={btnAgregar} className="ml-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                             Añadir al carrito
                         </button>
                     </div>
