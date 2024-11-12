@@ -7,22 +7,26 @@ import Register from './pages/Register';
 import Home from './Home'
 import { AuthProvider } from './Contexts/AuthContext';
 import { CarritoProvider } from './Contexts/CarritoContext';
+import { Provider } from 'react-redux';
+import store from './store';
 
 
 const App = () => {
   return (
     <AuthProvider>
-      <CarritoProvider>  
-        <Router>
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/home/*" element={
-              <Home />
-              }/>
-          </Routes>
-        </Router>
+      <CarritoProvider>
+        <Provider store={store}> 
+          <Router>
+            <Routes>
+              <Route path="*" element={<NotFound />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/home/*" element={
+                <Home />
+                }/>
+            </Routes>
+          </Router>
+        </Provider> 
       </CarritoProvider> 
     </AuthProvider>
   );

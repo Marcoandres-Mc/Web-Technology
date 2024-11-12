@@ -1,6 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {CarritoContext} from '../../Contexts/CarritoContext';
+/* import {CarritoContext} from '../../Contexts/CarritoContext'; */
+import { useDispatch } from 'react-redux';
+import { agregarAlCarrito } from '../../Features/Carrito/CarritoSlice';
+
 
 const DetallesProducto = () => {
 
@@ -22,10 +25,13 @@ const DetallesProducto = () => {
         }
     };
 
-    const { agregarAlCarrito } = useContext(CarritoContext);
+    /* const { agregarAlCarrito } = useContext(CarritoContext); */
+    const dispatch = useDispatch();
+
+
     
     const btnAgregar = () => {
-        agregarAlCarrito({ id, nombre, descripcion, precio, img: decodedImg, cantidad: quantity });
+        dispatch(agregarAlCarrito({ id, nombre, descripcion, precio, img: decodedImg, cantidad: quantity }));
     }
     
 
