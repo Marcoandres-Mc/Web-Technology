@@ -48,7 +48,7 @@ const locationsData = [
 const Locations = () => {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100 mt-20">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-[1200px] mx-auto p-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-[1200px] mx-auto p-16">
                 {locationsData.map((location) => (
                     <div key={location.id} className="relative flex flex-col text-gray-700 bg-white shadow-lg bg-clip-border rounded-xl w-full transform transition-transform duration-300 hover:scale-105">
                         <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-80">
