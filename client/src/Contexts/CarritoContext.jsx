@@ -12,10 +12,10 @@ export const CarritoProvider = ({ children }) => {
         setTotal(total + producto.precio);
     };
     
-    const eliminarDelCarrito = (id) => {
-        const newCarrito = carrito.filter((item) => item.id !== id);
+    const eliminarDelCarrito = (productoId,productoPrecio) => {
+        const newCarrito = carrito.filter((item) => item.id !== productoId);
         setCarrito(newCarrito);
-        setTotal(total - producto.precio);
+        setTotal(total - productoPrecio);
     };
     
     return (

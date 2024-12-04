@@ -12,7 +12,7 @@ const Header = () => {
   const closeMenu = () => {
     setActiveMenu(null);
   };
-  const cuenta = false;
+  const cuenta = true;
 
   return (
     <>
