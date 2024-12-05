@@ -44,14 +44,14 @@ const Pccomps = () => {
 
     const [productsComponentes, setProductsComponentes] = useState([]);
 
-    useEffect (() => {
+    useEffect(() => {
         const fetchProducts = async () => {
             const products = await getProductsComponentes();
             setProductsComponentes(products);
             console.log(products);
         };
         fetchProducts();
-    }, []);	
+    }, []);
 
     return (
         <div className="flex justify-center items-center min-h-screen mt-20">

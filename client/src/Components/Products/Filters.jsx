@@ -4,7 +4,7 @@ export const Filters = () => {
     const [datosBd, setDatosBd] = useState([]);
     const [filters, setFilters] = useState([]);
 
-    useEffect (() => {
+    useEffect(() => {
         const fetchProducts = async () => {
             const products = await getProductsLaptos();
             setProductsLaptos(products);
@@ -12,7 +12,7 @@ export const Filters = () => {
         };
         fetchProducts();
     }, []);
-    
+
     function useReducer(reducer, initialState) {
         const [state, setState] = useState(initialState);
         const dispatch = (action) => {
@@ -21,8 +21,8 @@ export const Filters = () => {
         };
         return [state, dispatch];
     }
-    
-  return (
-    <div>Filters</div>
-  )
+
+    return (
+        <div>Filters</div>
+    )
 }

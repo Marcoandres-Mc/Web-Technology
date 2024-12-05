@@ -7,10 +7,10 @@ import { agregarAlCarrito } from '../../Features/Carrito/CarritoSlice';
 
 const DetallesProducto = () => {
 
-    const {id, nombre, descripcion, precio, img} = useParams();
+    const { id, nombre, descripcion, precio, img } = useParams();
     const decodedImg = decodeURIComponent(img).replace(/\|/g, '/');
 
-    
+
 
     const [quantity, setQuantity] = useState(1);
 
@@ -29,14 +29,14 @@ const DetallesProducto = () => {
     const dispatch = useDispatch();
 
 
-    
+
     const btnAgregar = () => {
         dispatch(agregarAlCarrito({ id, nombre, descripcion, precio, img: decodedImg, cantidad: quantity }));
     }
-    
 
 
-    
+
+
 
     return (
         <div className="flex justify-center items-center min-h-screen mt-20">
@@ -51,10 +51,10 @@ const DetallesProducto = () => {
                     <div>
                         <h2 className="text-2xl font-bold text-gray-800">{nombre}</h2>
                         <p className="text-gray-600 mt-2">{descripcion}</p>
-                        <p className="text-xl font-semibold text-green-500 mt-4">{"S/."+ precio}</p>
+                        <p className="text-xl font-semibold text-green-500 mt-4">{"S/." + precio}</p>
                     </div>
 
-    
+
                     <div className="flex items-center mt-6">
                         <button onClick={decreaseQuantity} className="px-3 py-1 bg-gray-300 text-gray-800 rounded-l">-</button>
                         <span className="px-4 py-1 border-t border-b">{quantity}</span>

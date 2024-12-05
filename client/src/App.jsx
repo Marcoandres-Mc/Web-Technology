@@ -15,7 +15,7 @@ const App = () => {
   return (
     <AuthProvider>
       <CarritoProvider>
-        <Provider store={store}> 
+        <Provider store={store}>
           <Router>
             <Routes>
               <Route path="*" element={<NotFound />} />
@@ -23,11 +23,11 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/home/*" element={
                 <Home />
-                }/>
+              } />
             </Routes>
           </Router>
-        </Provider> 
-      </CarritoProvider> 
+        </Provider>
+      </CarritoProvider>
     </AuthProvider>
   );
 };

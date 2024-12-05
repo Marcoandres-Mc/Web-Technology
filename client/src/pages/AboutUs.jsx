@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import Carrusel from '../Components/Home/Carrusel';
 import Recommendations from '../Components/Home/Recommendations';
+import SectionThree from '../Components/Home/sectionthree';
+import SectionFour from '../Components/Home/SectionFour';
 
 const AboutUs = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -78,6 +80,13 @@ const AboutUs = () => {
       <section className="mt-20">
         <Recommendations />
       </section>
+      <section className='mt-20'>
+        <SectionFour />
+      </section>
+      <section className='mt-20'>
+        <SectionThree />
+      </section>
+
 
       <div className="contacto fixed bottom-0 end-0 mb-4 mr-4">
         <a href="https://chat.whatsapp.com/GDgpouaqc589mNUxBSmvH6" target="_blank" rel="noopener noreferrer">
