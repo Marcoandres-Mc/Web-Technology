@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = "http://localhost:3500/api";
+const API = "http://localhost:3500/api/auth";
 
 export const getUsers = async () => {
     try {

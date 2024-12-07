@@ -1,13 +1,10 @@
 import React from 'react'
 import { Card, CardBody, Typography, Avatar} from "@material-tailwind/react";
 import { useSelector, useDispatch } from 'react-redux';
-import { eliminarDelCarrito } from '../../Features/Carrito/CarritoSlice';
-
 /* import {CarritoContext} from '../../Contexts/CarritoContext'; */
 
 
 const ListaCarrito = () => {
-/*   const {carrito, eliminarDelCarrito} = useContext(CarritoContext); */
 
   const carritoProductos = useSelector((state)=> state.carrito);
   const dispatch = useDispatch();

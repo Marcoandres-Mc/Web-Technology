@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import Carrusel from '../Components/Home/Carrusel';
 import Recommendations from '../Components/Home/Recommendations';
-import SectionThree from '../Components/Home/sectionthree';
+import SectionThree from '../Components/Home/Sectionthree';
 import SectionFour from '../Components/Home/SectionFour';
 
 const AboutUs = () => {

@@ -2,8 +2,6 @@ import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 /* import {CarritoContext} from '../../Contexts/CarritoContext'; */
 import { useDispatch } from 'react-redux';
-import { agregarAlCarrito } from '../../Features/Carrito/CarritoSlice';
-
 
 const DetallesProducto = () => {
 

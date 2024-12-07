@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Button } from '@material-tailwind/react';
 import { loginUser } from '../api/users.js';
+import { login } from '../Components/Redux/Auth/AuthSlice.js';
 
 
 
@@ -15,10 +16,13 @@ const Login = () => {
     const onSubmit = handleSubmit( async (data)=>{
         try{
             const response = await loginUser(data);
+            
         
             console.log(data);
             
             if(response.status === 200){
+                login(response.data);
+                console.log(response.data);
                 navigate('/home');
             }
             else{
