@@ -1,1 +1,0 @@
-export const API = "https://web-technology-hyee.onrender.com";
