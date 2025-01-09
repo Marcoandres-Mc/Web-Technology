@@ -1,10 +1,9 @@
 import axios from 'axios';
-
-const API = "http://localhost:3500/api";
+import { API } from './urlAPI';
 
 export const getProductsLaptos = async () => {
   try {
-    const response = await axios.get(`${API}/products/laptos`);
+    const response = await axios.get(`${API}/products/laptos/api`);
     return response.data;
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -13,7 +12,7 @@ export const getProductsLaptos = async () => {
 };
 export const getProduct = async (id) => {
   try {
-    const response = await axios.get(`${API}/product/${id}`);
+    const response = await axios.get(`${API}/product/${id}/api`);
     return response.data;
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -24,7 +23,7 @@ export const getProduct = async (id) => {
 
 export const getProductsCelulares = async () => {
   try {
-    const response = await axios.get(`${API}/products/celulares`);
+    const response = await axios.get(`${API}/products/celulares/api`);
     return response.data;
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -34,7 +33,7 @@ export const getProductsCelulares = async () => {
 
 export const getProductsGaming = async () => {
   try {
-    const response = await axios.get(`${API}/products/gaming`);
+    const response = await axios.get(`${API}/products/gaming/api`);
     return response.data;
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -44,7 +43,7 @@ export const getProductsGaming = async () => {
 
 export const getProductsComponentes = async () => {
   try {
-    const response = await axios.get(`${API}/products/componentes`);
+    const response = await axios.get(`${API}/products/componentes/api`);
     return response.data;
   } catch (error) {
     console.error('Error fetching users:', error);
