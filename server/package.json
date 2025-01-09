@@ -2,11 +2,12 @@
   "name": "src",
   "version": "1.0.0",
   "type": "module",
-  "main": "./src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",
