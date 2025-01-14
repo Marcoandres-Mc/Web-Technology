@@ -1,4 +1,4 @@
-import { agregarAlCarrito, eliminarDelCarrito } from './CarritoSlice.js';
+import { agregarAlCarrito, aumentarTotal, disminuirTotal ,eliminarDelCarrito } from './CarritoSlice.js';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -9,7 +9,28 @@ export const useCarrito = () => {
 
     
     const addProduct = (producto) => {
-        dispatch(agregarAlCarrito(producto));
+
+        const existeProducto = carrito.find((item) => item.id === producto.id)
+
+        if (existeProducto) {
+            const updatedProduct = {
+                ...existeProducto,
+                cantidad: existeProducto.cantidad + producto.cantidad,
+                precio: existeProducto.precio + (producto.precio * producto.cantidad),
+            };
+
+            removeProduct(existeProducto.id, existeProducto.precio);
+            dispatch(aumentarTotal(updatedProduct.precio));
+            dispatch(agregarAlCarrito(updatedProduct));
+
+        }else{
+            const precioProducto = producto.precio * producto.cantidad;
+            producto = {...producto, precio: precioProducto}
+
+            dispatch(aumentarTotal(precioProducto));
+            dispatch(agregarAlCarrito(producto));
+        }
+ 
     };
 
     

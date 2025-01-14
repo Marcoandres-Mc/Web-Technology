@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@material-tailwind/react';
 import { loginUser } from '../api/users.js';
 import { login } from '../Components/Redux/Auth/AuthSlice.js';
+import { useAuth } from '../Components/Redux/Auth/AuthHelpers';
 
 
 
@@ -11,14 +12,18 @@ const Login = () => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const [error, setError] = useState(false);
+    const { isAuthenticated, signIn, signOut, checkAuth } = useAuth();
+
 
 
     const onSubmit = handleSubmit(async (data) => {
         try {
             const response = await loginUser(data);
-    
+            
+
             if (response?.token) {
                 login(response.token); 
+                signIn();
                 console.log('Usuario autenticado:', response);
                 navigate('/home'); 
             } else {

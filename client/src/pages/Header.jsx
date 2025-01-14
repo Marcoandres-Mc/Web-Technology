@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Carrito from '../Components/Home/Carrito'
+import { useAuth } from '../Components/Redux/Auth/AuthHelpers';
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(null);
+  const { isAuthenticated, signIn, signOut, checkAuth } = useAuth();
+
+  const [cuenta, setCuenta] = useState(false);
+  
 
   const toggleMenu = (menu) => {
     setActiveMenu(activeMenu === menu ? null : menu);
@@ -12,7 +17,10 @@ const Header = () => {
   const closeMenu = () => {
     setActiveMenu(null);
   };
-  const cuenta = false;
+  
+  if(checkAuth === false){
+    setCuenta(false);
+  }
 
   return (
     <>

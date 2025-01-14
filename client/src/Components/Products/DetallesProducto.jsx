@@ -27,8 +27,6 @@ const DetallesProducto = () => {
         }
     };
 
-    /* const { agregarAlCarrito } = useContext(CarritoContext); */
-    const dispatch = useDispatch();
 
 
 

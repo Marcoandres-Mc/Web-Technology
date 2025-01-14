@@ -6,7 +6,7 @@ import { loginUser, registerUser } from '../api/users';
 
 const Register = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = handleSubmit( async (data) => {
         if (data.password !== data.confirmPassword) {
@@ -15,31 +15,31 @@ const Register = () => {
         }
 
         const newUser = {
-            name: data.nombre,
-            email: data.email,
-            password: data.password,
+            "name": data.nombre,
+            "email": data.email,
+            "password": data.password,
         };
 
         try {
             const response = await registerUser(newUser);
 
-            const verificacion = {
-                email: data.email,
-                password: data.password,
-            }
-            
-            loginUser(verificacion);
-
             if (!response) {
                 console.error('Error registrando usuario:', response);
                 return;
-            }else{
-                console.log('Usuario registrado:', response);
-                navigate('/login');
+              }
+
+            const verificacion = {
+                "email": data.email,
+                "password": data.password,
             }
+            
+            await loginUser(verificacion);
+            console.log('Usuario registrado:', response);
+            navigate('/login');
 
         } catch (error) {
-            console.error('Error registrando usuario:', error);
+            console.error('Error registrando usuario:', response);
+            
         }
 
     })
