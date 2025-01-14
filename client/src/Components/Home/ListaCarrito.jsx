@@ -1,7 +1,8 @@
 import React from 'react'
 import { Card, CardBody, Typography, Avatar} from "@material-tailwind/react";
-/* import {CarritoContext} from '../../Contexts/CarritoContext'; */
 import {useCarrito} from '../Redux/CarritoCompra/CarritoHelpers.js'
+
+import { Link } from 'react-router-dom';
 
 const ListaCarrito = () => {
 
@@ -20,15 +21,15 @@ const ListaCarrito = () => {
           <Typography variant="h5" color="blue-gray" className="">
             Lista de compras
           </Typography>
-          <Typography
-            as="a"
-            href="#"
-            variant="small"
-            color="blue"
-            className="font-bold"
-          >
-            Ver todas
-          </Typography>
+          <Link to="/resumenCompra" className="hover:text-cyan-400 transition duration-200">
+            <Typography
+              variant="small"
+              color="blue"
+              className="font-bold"
+            >
+              Ver todas
+            </Typography>
+          </Link>
         </div>
         <div className="divide-y divide-gray-200 h-96 overflow-y-scroll">
           {carrito.map(({id,nombre,cantidad, precio, img }, index) => (

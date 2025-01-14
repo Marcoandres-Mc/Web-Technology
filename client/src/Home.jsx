@@ -26,11 +26,13 @@ const Home = () => {
                 <Route path="/productos/phones" element={<Phones />} />
                 <Route path="/productos/gaming" element={<Gaming />} />
                 <Route path="/productos/pc" element={<Pccomps />} />
+                
 
                 <Route path="/producto/detalles/:id/:nombre/:descripcion/:precio/:img" element={<DetallesProducto />} />
 
                 <Route path="/preguntasFrecuentes" element={<ContactUs />} />
                 <Route path="/sedes" element={<Locations />} />
+                
             </Routes>
             <Footer />
         </>

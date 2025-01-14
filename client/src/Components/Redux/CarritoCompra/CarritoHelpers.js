@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 export const useCarrito = () => {
     const dispatch = useDispatch();
     const carrito = useSelector((state) => state.carrito.carrito);
-    const total = useSelector((state) => state.carrito.total);
+    const precioTotal = useSelector((state) => state.carrito.total);
 
     
     const addProduct = (producto) => {
@@ -31,7 +31,7 @@ export const useCarrito = () => {
 
     return {
         carrito,
-        total,
+        precioTotal,
         addProduct,
         removeProduct,
         getProductById,

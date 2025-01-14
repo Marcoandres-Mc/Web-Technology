@@ -3,7 +3,7 @@ import './App.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { Navigate } from 'react-router-dom';
-
+import ResumenCompra from './pages/ResumenCompra';
 
 import Home from './Home'
 
@@ -14,6 +14,7 @@ const App = () => {
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/resumenCompra" element={<ResumenCompra />} />
               <Route path="/home/*" element={
                 <Home />
               } />
