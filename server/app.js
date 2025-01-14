@@ -17,12 +17,12 @@ app.get('/', (req, res) => {
     res.send('Conectado');
 })
 app.use(cors({
-    origin: process.env.MAIN_PAGE.replace(/\/$/, ''), 
+    origin: 'http://localhost:5173', //process.env.MAIN_PAGE.replace(/\/$/, '')
     credentials: true
 }));
 
 app.use('/api', productRoutes);
-app.use('/api/auth', userRoutes);
+app.use('/api', userRoutes);
 
 
 

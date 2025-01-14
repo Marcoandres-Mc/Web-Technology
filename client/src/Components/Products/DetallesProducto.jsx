@@ -2,8 +2,12 @@ import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 /* import {CarritoContext} from '../../Contexts/CarritoContext'; */
 import { useDispatch } from 'react-redux';
+import {useCarrito} from '../Redux/CarritoCompra/CarritoHelpers.js'
+
 
 const DetallesProducto = () => {
+
+    const { addProduct } = useCarrito();
 
     const { id, nombre, descripcion, precio, img } = useParams();
     const decodedImg = decodeURIComponent(img).replace(/\|/g, '/');
@@ -29,7 +33,7 @@ const DetallesProducto = () => {
 
 
     const btnAgregar = () => {
-        dispatch(agregarAlCarrito({ id, nombre, descripcion, precio, img: decodedImg, cantidad: quantity }));
+        addProduct({ id, nombre, descripcion, precio, img: decodedImg, cantidad: quantity });
     }
 
 

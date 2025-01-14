@@ -5,19 +5,19 @@ export const getProduct = async (req, res) => {
 }
 
 export const getProductsLaptos = async (req, res) => {
-    const products = await Product.find({ categoria: 'laptops' });
+    const products = await Product.find({ categoria: 'laptops' || 'Laptops' });
     res.json(products);
 };
 export const getProductsCelulares = async (req, res) => {
-    const products = await Product.find({ categoria: 'celulares' });
+    const products = await Product.find({ categoria: 'celulares' || 'Celulares' });
     res.json(products);
 }
 export const getProductsGaming = async (req, res) => {
-    const products = await Product.find({ categoria: 'gaming' });
+    const products = await Product.find({ categoria: 'gaming' || 'Gaming' });
     res.json(products);
 }
 export const getProductsComponentes = async (req, res) => {
-    const products = await Product.find({ categoria: 'componentes' });
+    const products = await Product.find({ categoria: 'componentes' || 'Componentes' });
     res.json(products);
 }
 

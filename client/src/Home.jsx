@@ -10,14 +10,17 @@ import Gaming from './Components/Products/Gaming';
 import Pccomps from './Components/Products/Pccomps';
 import AboutUs from './pages/AboutUs';
 import DetallesProducto from './Components/Products/DetallesProducto';
+import ScrollToTop from './ScrollToTop';
 
 const Home = () => {
 
 
     return (
         <>
+            <ScrollToTop />
             <Header />
             <Routes>
+                
                 <Route path="*" element={<AboutUs />} />
                 <Route path="/productos/computacion" element={<Computing />} />
                 <Route path="/productos/phones" element={<Phones />} />
@@ -30,9 +33,7 @@ const Home = () => {
                 <Route path="/sedes" element={<Locations />} />
             </Routes>
             <Footer />
-
         </>
-
     );
 };
 

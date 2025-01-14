@@ -38,9 +38,6 @@ const PccompsData = [
 const Pccomps = () => {
     const navigate = useNavigate();
 
-    const handleProductClick = (product) => {
-        navigate('/details', { state: { product } });
-    };
 
     const [productsComponentes, setProductsComponentes] = useState([]);
 
@@ -53,33 +50,39 @@ const Pccomps = () => {
         fetchProducts();
     }, []);
 
+    const handleProductClick = (item) => {
+        const urlImg = encodeURIComponent(item.url).replace(/%2F/g, '|')
+        const url = `/home/producto/detalles/${item._id}/${item.nombre}/${item.descripcion}/${item.precio}/${urlImg}`;
+        navigate(url);
+    };
+
     return (
         <div className="flex justify-center items-center min-h-screen mt-20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
                 {productsComponentes.map((item) => (
                     <div
-                        key={item.id}
+                        key={item._id}
                         className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full transform transition-transform duration-300 hover:scale-105"
                         onClick={() => handleProductClick(item)}
                     >
                         <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
                             <img
-                                src={item.image}
-                                alt={item.title}
+                                src={item.url}
+                                alt={item.nombre}
                                 className="object-cover w-full h-full"
                             />
                         </div>
                         <div className="p-6">
                             <div className="flex items-center justify-between mb-2">
                                 <p className="block font-sans text-base font-medium text-blue-gray-900">
-                                    {item.title}
+                                    {item.nombre}
                                 </p>
                                 <p className="block font-sans text-base font-medium text-blue-gray-900">
-                                    {item.price}
+                                    {item.precio}
                                 </p>
                             </div>
                             <p className="block font-sans text-sm text-gray-700 opacity-75">
-                                {item.description}
+                                {item.descripcion}
                             </p>
                         </div>
                     </div>

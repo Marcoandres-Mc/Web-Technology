@@ -19,11 +19,22 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
 
-    }
-    },{
+    },
+    listaCarrito: [
+        {
+            productoId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+            },
+            cantidad: {
+                type: Number,
+            },
+        }
+    ],
+},  {
         timestamps: true,
         versionKey: false
     }
-)
+);
 
 export default mongoose.model('Users', userSchema);

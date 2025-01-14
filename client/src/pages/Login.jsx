@@ -13,26 +13,21 @@ const Login = () => {
     const [error, setError] = useState(false);
 
 
-    const onSubmit = handleSubmit( async (data)=>{
-        try{
+    const onSubmit = handleSubmit(async (data) => {
+        try {
             const response = await loginUser(data);
-            
-        
-            console.log(data);
-            
-            if(response.status === 200){
-                login(response.data);
-                console.log(response.data);
-                navigate('/home');
+    
+            if (response?.token) {
+                login(response.token); 
+                console.log('Usuario autenticado:', response);
+                navigate('/home'); 
+            } else {
+                setError(true); 
             }
-            else{
-                setError(true);
-            }
-
-        }catch(error){
+        } catch (error) {
             console.error('Error fetching users:', error);
+            setError(true); 
         }
-        
     });
 
     return (

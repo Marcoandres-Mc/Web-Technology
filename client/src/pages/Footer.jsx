@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faGithub } from '@fortawesome/free-brands-svg-icons';
 const Footer = () => {
   return (
-    <>
       <footer className="bg-black text-white text-center dark:bg-black dark:text-white lg:text-left">
         <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-white/10 lg:justify-between">
           <div className="me-12 hidden lg:block">
@@ -96,8 +95,7 @@ const Footer = () => {
           <a className="text-neutral-600 dark:text-neutral-400" href="https://technologyplus.pe/">Technology+</a>
         </div>
       </footer >
-    </>
-  );
+  )
 }
 
 export default Footer;

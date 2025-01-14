@@ -10,12 +10,12 @@ const Questions = () => {
   return (
     <section
       id="preguntas"
-      className="py-16 bg-blue-300 mt-24 "
+      className="py-16 bg-white mt-24 "
 
     >
-      <div className="container mx-auto flex flex-wrap items-center">
+      <div className="container mx-auto flex flex-wrap items-center ">
         <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 ">
             <h1 className="text-3xl font-bold">
               PREGUNTAS FRECUENTES
             </h1>
@@ -27,7 +27,7 @@ const Questions = () => {
           </div>
 
           {/* Acordeón */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden ">
             {accordionData.map((item, index) => (
               <div key={index} className="border-b border-gray-200 last:border-none">
                 <button
