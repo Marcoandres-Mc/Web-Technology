@@ -12,9 +12,19 @@ const Pccomps = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
+        setLoading(true);
+        try{
             const products = await getProductsComponentes();
             setProductsComponentes(products);
             console.log(products);
+            setLoading(false);
+        }catch(error){
+            console.error('Error fetching dulceria:', error);
+            setLoading(false);
+
+        } finally{
+            setLoading(false)
+        }
         };
         fetchProducts();
     }, []);

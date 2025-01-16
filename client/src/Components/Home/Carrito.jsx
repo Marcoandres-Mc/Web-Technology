@@ -29,7 +29,6 @@ const Carrito = () => {
         </svg>
       </StyledButton>
       {listaActive && <ListaCarrito />}
-
     </div>
     
     

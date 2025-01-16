@@ -1,6 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { getProductsGaming } from '../../api/products';
+import Spinner from '../Spinner';
+import { useNavigate } from 'react-router-dom';
 
-const products = [
+const productsss = [
     {
         id: 1,
         brand: 'Sony®',
@@ -53,8 +56,33 @@ const products = [
 
 ];
 
+
 const Recommendations = () => {
     const carouselRef = useRef(null);
+    const [prodRecomendados, setProdRecomendados] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+            const fetchProducts = async () => {
+                setLoading(true);
+                try{
+                    const products = await getProductsGaming();
+                    setProdRecomendados(products);
+                    console.log(products);
+                    setLoading(false);
+                }catch(error){
+                    console.error('Error fetching dulceria:', error);
+                    setLoading(false);
+    
+                } finally{
+                    setLoading(false)
+                }
+                
+            };
+            fetchProducts();
+        }, []);
 
     const scrollCarousel = (direction) => {
         if (carouselRef.current) {
@@ -71,47 +99,56 @@ const Recommendations = () => {
         console.log(`Added to cart: ${product.name}`);
     };
 
+    const handleProductClick = (item) => {
+        const urlImg = encodeURIComponent(item.url).replace(/%2F/g, '|')
+        const url = `/home/producto/detalles/${item._id}/${item.nombre}/${item.descripcion}/${item.precio}/${urlImg}`;
+        navigate(url);
+    };
+
     return (
-        <div className="p-4">
-            <h2 className="text-white bg-black text-2xl font-semibold p-4 text-center">
-                Te recomendamos:
-            </h2>
-            <div className="relative mt-10">
-                <button
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-l-lg z-10"
-                    onClick={() => scrollCarousel('left')}
-                >
-                    &#10094; {/* Icono de flecha izquierda */}
-                </button>
-                <div
-                    ref={carouselRef}
-                    className="flex overflow-x-auto whitespace-nowrap scroll-smooth"
-                >
-                    {products.map((product) => (
-                        <div key={product.id} className="max-w-sm m-4 bg-white shadow-xl rounded-lg inline-block transition-transform transform hover:scale-105">
-                            <img className="w-full h-64 object-cover" src={product.image} alt={product.name} />
-                            <div className="p-4">
-                                <h2 className="font-semibold text-xl">{product.brand}</h2>
-                                <p className="text-gray-800">{product.name}</p>
-                                <p className="text-black font-bold text-lg">{product.price}</p>
-                                <button
-                                    className="mt-4 w-full text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
-                                    onClick={() => handleAddToCart(product)}
-                                >
-                                    Add to Cart
-                                </button>
+        <>
+            {loading && <Spinner />}
+            <div className="p-4">
+                <h2 className="text-white bg-black text-2xl font-semibold p-4 text-center">
+                    Te recomendamos:
+                </h2>
+                <div className="relative mt-10">
+                    <button
+                        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-l-lg z-10"
+                        onClick={() => scrollCarousel('left')}
+                    >
+                        &#10094; {/* Icono de flecha izquierda */}
+                    </button>
+                    <div
+                        ref={carouselRef}
+                        className="flex overflow-x-auto whitespace-nowrap scroll-smooth"
+                    >
+                        {prodRecomendados.map((product) => (
+                            <div key={product._id} onClick={() => handleProductClick(product)} className=" max-w-[300px] max-w-sm m-4 bg-white shadow-xl rounded-lg inline-block transition-transform transform hover:scale-105">
+                                <img className="w-full h-64 object-cover" src={product.url} alt={product.nombre} />
+                                <div className="p-4">
+                                    <h2 className="font-semibold text-xl">{product.nombre}</h2>
+                                    <p className="text-gray-800">{product.nombre}</p>
+                                    <p className="text-black font-bold text-lg">S/.{product.precio}</p>
+                                    <button
+                                        className="mt-4 w-full text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                                        onClick={() => handleAddToCart(product)}
+                                    >
+                                        Add to Cart
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                    <button
+                        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-r-lg z-10"
+                        onClick={() => scrollCarousel('right')}
+                    >
+                        &#10095; {/* Icono de flecha derecha */}
+                    </button>
                 </div>
-                <button
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-r-lg z-10"
-                    onClick={() => scrollCarousel('right')}
-                >
-                    &#10095; {/* Icono de flecha derecha */}
-                </button>
             </div>
-        </div>
+        </>
     );
 };
 

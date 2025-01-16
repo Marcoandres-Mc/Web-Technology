@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getProductsLaptos } from '../../api/products';
-
+import Spinner from '../Spinner';
 
 
 const Computing = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
     const [productsLaptos, setProductsLaptos] = useState([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const products = await getProductsLaptos();
-            setProductsLaptos(products);
+            setLoading(true);
+                try{
+                    const products = await getProductsLaptos();
+                    setProductsLaptos(products);
+                console.log(products);
+                    setLoading(false);
+                }catch(error){
+                    console.error('Error fetching dulceria:', error);
+                    setLoading(false);
+    
+                } finally{
+                    setLoading(false)
+                }
         };
         fetchProducts();
     }, []);
@@ -24,6 +36,8 @@ const Computing = () => {
 
 
     return (
+        <>
+        {loading && <Spinner />}
         <div className="flex justify-center items-center min-h-screen mt-32 my-5">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
                 {productsLaptos.map((item) => (
@@ -57,6 +71,7 @@ const Computing = () => {
                 ))}
             </div>
         </div>
+        </>
     );
 };
 
