@@ -27,7 +27,7 @@ const products = [
         brand: 'Sony®',
         name: 'Consola Playstation 5 + God of War Ragnarok',
         image: 'https://www.artefacta.com/media/catalog/product/1/0/1002010037_1__ckkzgualsww0uyeg_1.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=1040&width=1040&canvas=1040:1040',
-        price: 'S/. 3, 7209.90',
+        price: 'S/. 3, 729.90',
     },
     {
         id: 7,
@@ -48,7 +48,7 @@ const products = [
         brand: 'Sony®',
         name: 'Mando Inalámbrico Ps5 Rojo',
         image: 'https://promart.vteximg.com.br/arquivos/ids/7419883-1000-1000/image-b20864ed391e4dd598f5198e40587573.jpg?v=638272877507600000',
-        price: 'S/. 409.50 PEN',
+        price: 'S/. 409.50',
     },
 
 ];

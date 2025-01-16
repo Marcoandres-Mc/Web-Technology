@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 /* import {CarritoContext} from '../../Contexts/CarritoContext'; */
 import { useDispatch } from 'react-redux';
-import {useCarrito} from '../Redux/CarritoCompra/CarritoHelpers.js'
+import { useCarrito } from '../Redux/CarritoCompra/CarritoHelpers.js'
 
 
 const DetallesProducto = () => {
@@ -49,8 +49,8 @@ const DetallesProducto = () => {
 
                 <div className="p-6 flex flex-col justify-between md:w-1/2">
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-800">{nombre}</h2>
-                        <p className="text-gray-600 mt-2">{descripcion}</p>
+                        <h2 className="text-2xl font-bold text-black">{nombre}</h2>
+                        <p className="text-black mt-2">{descripcion}</p>
                         <p className="text-xl font-semibold text-green-500 mt-4">{"S/." + precio}</p>
                     </div>
 

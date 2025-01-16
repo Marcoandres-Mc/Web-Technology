@@ -9,14 +9,14 @@ const Gaming = () => {
 
     const [productsGaming, setProductsGaming] = useState([]);
 
-    useEffect (() => {
+    useEffect(() => {
         const fetchProducts = async () => {
             const products = await getProductsGaming();
             setProductsGaming(products);
             console.log(products);
         };
         fetchProducts();
-    }, []);	
+    }, []);
 
     const handleProductClick = (item) => {
         const urlImg = encodeURIComponent(item.url).replace(/%2F/g, '|')
@@ -25,15 +25,15 @@ const Gaming = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen mt-20">
+        <div className="flex justify-center items-center min-h-screen mt-32 my-5">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
-                {productsGaming.map((item) => ( // Cambiado a "GamingData"
+                {productsGaming.map((item) => (
                     <div
                         key={item._id}
                         className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full transform transition-transform duration-300 hover:scale-105"
                         onClick={() => handleProductClick(item)}
                     >
-                        <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
+                        <div className="relative mx-4 mt-4 overflow-hidden text-black bg-white bg-clip-border rounded-xl h-96">
                             <img
                                 src={item.url}
                                 alt={item.nombre}
@@ -42,14 +42,15 @@ const Gaming = () => {
                         </div>
                         <div className="p-6">
                             <div className="flex items-center justify-between mb-2">
-                                <p className="block font-sans text-base font-medium text-blue-gray-900">
+                                <p className="block font-sans text-base font-bold text-gray-800">
                                     {item.nombre}
                                 </p>
-                                <p className="block font-sans text-base font-medium text-blue-gray-900">
+                                <p className="block font-sans text-base font-medium text-blue-600">
+                                    S/.
                                     {item.precio}
                                 </p>
                             </div>
-                            <p className="block font-sans text-sm text-gray-700 opacity-75">
+                            <p className="block font-sans text-sm text-black opacity-75">
                                 {item.descripcion}
                             </p>
                         </div>
