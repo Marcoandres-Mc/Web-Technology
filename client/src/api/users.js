@@ -21,6 +21,16 @@ export const getUser = async (id) => {
     }
 }
 
+export const getUserG = async (email) => {
+  try {
+      const response = await axios.get(`${API}/api/cuentas/usuarios`, email);
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching user:', error);
+      return [];
+  }
+}
+
 export const registerUser = async (user) => { 
   try {
       const response = await axios.post(`${API}/api/cuentas/usuarios`,user);
@@ -55,5 +65,6 @@ export const loginUser = async (user) => {
         return [];
     }
 }
+
 
 

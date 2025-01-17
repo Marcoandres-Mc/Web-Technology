@@ -7,7 +7,7 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const { isAuthenticated, signIn, signOut, checkAuth } = useAuth();
 
-  const [cuenta, setCuenta] = useState(false);
+  
   
 
   const toggleMenu = (menu) => {
@@ -18,9 +18,7 @@ const Header = () => {
     setActiveMenu(null);
   };
   
-  if(checkAuth === false){
-    setCuenta(false);
-  }
+
 
   return (
     <>
@@ -73,15 +71,15 @@ const Header = () => {
             </ul>
           </nav>
           {
-            cuenta ? (
+            isAuthenticated ? (
+              <div className="flex items-center space-x-4">
+              <Carrito />
+            </div>
+            ) : (
               <div className="flex items-center space-x-4">
                 <Link to="/login" className="text-white hover:bg-cyan-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2">
                   Log in
                 </Link>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-4">
-                <Carrito />
               </div>
             )}
         </div>

@@ -3,17 +3,19 @@ import { useParams } from 'react-router-dom';
 /* import {CarritoContext} from '../../Contexts/CarritoContext'; */
 import { useDispatch } from 'react-redux';
 import { useCarrito } from '../Redux/CarritoCompra/CarritoHelpers.js'
-
+import { useAuth } from '../Redux/Auth/AuthHelpers.js';
+import { useNavigate } from 'react-router-dom';
 
 const DetallesProducto = () => {
 
     const { addProduct } = useCarrito();
+    const {isAuthenticated} = useAuth();
+    const navigate = useNavigate();
 
     const { id, nombre, descripcion, precio, img } = useParams();
     const decodedImg = decodeURIComponent(img).replace(/\|/g, '/');
 
-
-
+    
     const [quantity, setQuantity] = useState(1);
 
 
@@ -31,7 +33,12 @@ const DetallesProducto = () => {
 
 
     const btnAgregar = () => {
-        addProduct({ id, nombre, descripcion, precio, img: decodedImg, cantidad: quantity });
+        if(isAuthenticated){
+            addProduct({ id, nombre, descripcion, precio, img: decodedImg, cantidad: quantity });
+        }else{
+            navigate("/login")
+        }
+        
     }
 
 

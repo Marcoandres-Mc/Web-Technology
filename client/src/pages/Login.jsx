@@ -5,25 +5,30 @@ import { Button } from '@material-tailwind/react';
 import { loginUser } from '../api/users.js';
 import { login } from '../Components/Redux/Auth/AuthSlice.js';
 import { useAuth } from '../Components/Redux/Auth/AuthHelpers';
-
+import { getUserG } from '../api/users.js';
 
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const [error, setError] = useState(false);
-    const { isAuthenticated, signIn, signOut, checkAuth } = useAuth();
+    const { isAuthenticated, signIn, user,agregarId } = useAuth();
 
 
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            const response = await loginUser(data);
-            
-
+            const response = await loginUser(data);  
             if (response?.token) {
                 login(response.token); 
-                signIn();
+ 
+                signIn({ nombre: response.nombre, email: response.email });
+
+                const res = await getUserG(data.email)
+                console.log(res)
+                agregarId(res._id)
+
+                
                 console.log('Usuario autenticado:', response);
                 navigate('/home'); 
             } else {

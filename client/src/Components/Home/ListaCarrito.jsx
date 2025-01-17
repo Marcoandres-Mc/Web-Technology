@@ -1,16 +1,59 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Typography, Avatar } from "@material-tailwind/react";
 import { useCarrito } from '../Redux/CarritoCompra/CarritoHelpers.js';
 import { Link } from 'react-router-dom';
 import { FaTrash } from 'react-icons/fa';
-import { Button } from '@mui/material';
-
+import { useAuth } from '../Redux/Auth/AuthHelpers.js';
+import { updateUser } from '../../api/users.js';
 const ListaCarrito = () => {
   const { carrito, removeProduct } = useCarrito();
+  const {user} = useAuth();
+  const [quantities, setQuantities] = useState(carrito.map(item => item.cantidad));
 
   const eliminarCarrito = (id, precio) => {
     removeProduct(id, precio);
   };
+
+  const increaseQuantity = (index) => {
+    const newQuantities = [...quantities];
+    newQuantities[index] += 1;
+    setQuantities(newQuantities);
+  };
+
+  const decreaseQuantity = (index) => {
+    const newQuantities = [...quantities];
+    if (newQuantities[index] > 1) {
+      newQuantities[index] -= 1;
+      setQuantities(newQuantities);
+    }
+  };
+
+  /* useEffect(() => {
+      const fetchProducts = async () => {
+          setLoading(true);
+          try{
+              const products = await getProductsGaming();
+              setProductsGaming(products);
+              console.log(products);
+              setLoading(false);
+          }catch(error){
+              console.error('Error fetching dulceria:', error);
+              setLoading(false);
+
+          } finally{
+              setLoading(false)
+          }
+          
+      };
+      fetchProducts();
+  }, []); */
+
+  const datosGuardados = () => {
+    const {isAuthenticated, ...rest} = user;
+    const newUser = {...rest, carrito}
+    updateUser(newUser,newUser.id)
+
+  }
 
   return (
     <Card className="transition-transform duration-300 ease-in-out transform w-[420px] absolute z-96 top-24 right-0">
@@ -19,52 +62,33 @@ const ListaCarrito = () => {
           <Typography variant="h5" color="blue-gray" className="">
             Lista de compras
           </Typography>
-          <Link to="/resumenCompra" className="hover:text-cyan-400 transition duration-200">
-            <Typography variant="small" color="blue" className="font-bold">
-              Ver todas
-            </Typography>
-          </Link>
         </div>
         <div className="divide-y divide-gray-200 h-80 overflow-y-scroll flex flex-col">
-          {carrito.map(({ id, nombre, cantidad, precio, img }) => {
-            const [cantidadC, setCantidadC] = useState(cantidad);
-
-            const increaseQuantity = () => {
-              setCantidadC(cantidadC + 1);
-            };
-
-            const decreaseQuantity = () => {
-              if (cantidadC > 1) {
-                setCantidadC(cantidadC - 1);
-              }
-            };
-
-            return (
-              <div key={id} className="flex items-center justify-start pb-3 pt-3 last:pb-0">
-                <div className='flex flex-col w-[10px] justify-center align-middle mx-3'>
-                  <button onClick={increaseQuantity} className="text-black rounded-l">+</button>
-                  <span className="border-t border-b justify-center">{cantidadC}</span>
-                  <button onClick={decreaseQuantity} className="text-black rounded-l">-</button>
-                </div>
-                <div className="flex items-center gap-x-3 min-w-[250px]">
-                  <Avatar size="sm" src={img} alt={nombre} className='max-w-20' />
-                  <div>
-                    <Typography color="blue-gray" variant="h6">
-                      {nombre}
-                    </Typography>
-                    <Typography variant="small" color="gray">
-                      ${precio}
-                    </Typography>
-                  </div>
-                </div>
-                <div className='flex justify-end mx-4'>
-                  <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => eliminarCarrito(id, precio)}>
-                    <FaTrash />
-                  </button>
+          {carrito.map(({ id, nombre, cantidad, precio, img }, index) => (
+            <div key={id} className="flex items-center justify-start pb-3 pt-3 last:pb-0">
+              <div className='flex flex-col w-[10px] justify-center align-middle mx-3'>
+                <button onClick={() => increaseQuantity(index)} className="text-black rounded-l">+</button>
+                <span className="border-t border-b justify-center">{quantities[index]}</span>
+                <button onClick={() => decreaseQuantity(index)} className="text-black rounded-l">-</button>
+              </div>
+              <div className="flex items-center gap-x-3 min-w-[250px]">
+                <Avatar size="sm" src={img} alt={nombre} className='max-w-20' />
+                <div>
+                  <Typography color="blue-gray" variant="h6">
+                    {nombre}
+                  </Typography>
+                  <Typography variant="small" color="gray">
+                    ${precio}
+                  </Typography>
                 </div>
               </div>
-            );
-          })}
+              <div className='flex justify-end mx-4'>
+                <button className="bg-red-500 text-white px-2 py-1 rounded" onClick={() => eliminarCarrito(id, precio)}>
+                  <FaTrash />
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
         <div className="mb-2 flex items-center justify-between mx-8 my-5">
           <Typography variant="h5" color="blue-gray" className="">
@@ -75,14 +99,14 @@ const ListaCarrito = () => {
           </Typography>
         </div>
         <div className="mt-4 flex justify-between">
-          <Link to="/carrito">
-            <Button color="blue" className="mr-2">
+          <Link to="/resumenCompra">
+            <button className="mt-4 w-64 bg-purple-900 text-white hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400  dark:hover:bg-purple-500 dark:focus:ring-purple-900">
               Ir al carrito
-            </Button>
+            </button>
           </Link>
-          <Button color="green">
+          <button onClick={ () =>{datosGuardados()}} className="border border-purple-800 mt-4 text-purple-900 hover:text-white  hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
             Guardar
-          </Button>
+          </button>
         </div>
       </CardBody>
     </Card>

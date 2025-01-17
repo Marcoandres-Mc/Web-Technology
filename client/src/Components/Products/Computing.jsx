@@ -8,6 +8,7 @@ const Computing = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [productsLaptos, setProductsLaptos] = useState([]);
+    
 
     useEffect(() => {
         const fetchProducts = async () => {

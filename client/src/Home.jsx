@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './pages/Header';
 import Footer from './pages/Footer';
 import ContactUs from './pages/ContactUs';
-import Locations from './pages/Locations';
+import Sedes from './pages/Sedes';
 import Computing from './Components/Products/Computing';
 import Phones from './Components/Products/Phones';
 import Gaming from './Components/Products/Gaming';
@@ -31,7 +31,7 @@ const Home = () => {
                 <Route path="/producto/detalles/:id/:nombre/:descripcion/:precio/:img" element={<DetallesProducto />} />
 
                 <Route path="/preguntasFrecuentes" element={<ContactUs />} />
-                <Route path="/sedes" element={<Locations />} />
+                <Route path="/sedes" element={<Sedes />} />
                 
             </Routes>
             <Footer />
