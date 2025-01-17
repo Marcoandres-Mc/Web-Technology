@@ -23,6 +23,19 @@ export const getUserNombre = async (req,res) =>{
     }
 }
 
+export const getUserByEmail = async (req, res) => {
+  try {
+      const foundUser = await User.findOne({ email: req.body.email });
+      if (!foundUser) {
+          return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+      }
+      res.json(foundUser);
+  } catch (error) {
+      res.status(500).json({ mensaje: error.message });
+  }
+};
+
+
 export const postUser = async (req,res)=>{
     const {nombre, email, password} = req.body;
     
@@ -91,7 +104,7 @@ export const deleteUser = async (req, res) => {
 
         const token = createAssessToken({ id: user._id });
         res.cookie('token', token);
-        return res.status(200).json({ token });
+        return res.status(200).json({ token, nombre: user.nombre, email: user.email,listaCarrito: user.listaCarrito });
     } catch (error) {
         res.status(500).json({ mensaje: error.message });
     }
@@ -104,7 +117,7 @@ export const deleteUser = async (req, res) => {
 
     export const updateUser = async (req, res) => {
         const { id } = req.params;
-        const { nombre, email, password } = req.body;
+        const { nombre, email, password, listaCarrito } = req.body;
       
         if (!id) {
           return res.status(400).json({ mensaje: 'ID es requerido' });
@@ -119,7 +132,7 @@ export const deleteUser = async (req, res) => {
       
           const passwordCrypt = await bcrypt.hash(password, 10);
       
-          await User.findByIdAndUpdate(id, { nombre, email, password: passwordCrypt });
+          await User.findByIdAndUpdate(id, { nombre, email, password: passwordCrypt, listaCarrito });
           res.json({ mensaje: 'Usuario actualizado' });
         } catch (error) {
           res.status(500).json({ mensaje: error.message });

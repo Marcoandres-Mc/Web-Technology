@@ -22,11 +22,9 @@ const Login = () => {
             if (response?.token) {
                 login(response.token); 
  
-                signIn({ nombre: response.nombre, email: response.email });
 
                 const res = await getUserG(data.email)
                 console.log(res)
-                agregarId(res._id)
 
                 
                 console.log('Usuario autenticado:', response);

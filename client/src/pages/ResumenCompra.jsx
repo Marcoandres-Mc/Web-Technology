@@ -12,7 +12,7 @@ const ResumenCompra = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full bg-black text-white p-4 flex justify-center items-center">
+      <div className="fixed top-0 left-0 w-full bg-black text-white p-4 flex justify-center items-center z-50">
         <h1 className="text-2xl font-bold">
           <Link to="/home" className="hover:text-cyan-400 transition duration-200">
             Technology+
