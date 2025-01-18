@@ -21,10 +21,10 @@ const Login = () => {
             const response = await loginUser(data);  
             if (response?.token) {
                 login(response.token); 
+                signIn(data);
  
 
                 const res = await getUserG(data.email)
-                console.log(res)
 
                 
                 console.log('Usuario autenticado:', response);

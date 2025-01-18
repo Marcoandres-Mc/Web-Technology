@@ -8,7 +8,8 @@ export const useAuth = () => {
     const user = useSelector((state) => state.auth);
 
     const signIn = (userData) => {
-        dispatch(login(userData));
+        const userNew = {...userData , isAuthenticated: true}
+        dispatch(login(userNew));
     };
 
     const signOut = () => {
