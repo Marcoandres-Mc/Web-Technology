@@ -7,7 +7,7 @@ import { useAuth } from '../Redux/Auth/AuthHelpers.js';
 import { updateUser } from '../../api/users.js';
 const ListaCarrito = () => {
   const { carrito, removeProduct } = useCarrito();
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [quantities, setQuantities] = useState(carrito.map(item => item.cantidad));
 
   const eliminarCarrito = (id, precio) => {
@@ -49,9 +49,9 @@ const ListaCarrito = () => {
   }, []); */
 
   const datosGuardados = () => {
-    const {isAuthenticated, ...rest} = user;
-    const newUser = {...rest, carrito}
-    updateUser(newUser,newUser.id)
+    const { isAuthenticated, ...rest } = user;
+    const newUser = { ...rest, carrito }
+    updateUser(newUser, newUser.id)
 
   }
 
@@ -74,11 +74,11 @@ const ListaCarrito = () => {
               <div className="flex items-center gap-x-3 min-w-[250px]">
                 <Avatar size="sm" src={img} alt={nombre} className='max-w-20' />
                 <div>
-                  <Typography color="blue-gray" variant="h6">
+                  <Typography variant="h6" className="text-black font-bold">
                     {nombre}
                   </Typography>
-                  <Typography variant="small" color="gray">
-                    ${precio}
+                  <Typography variant="small" className="text-blue-700 font-bold">
+                    S/.{precio}
                   </Typography>
                 </div>
               </div>
@@ -91,20 +91,20 @@ const ListaCarrito = () => {
           ))}
         </div>
         <div className="mb-2 flex items-center justify-between mx-8 my-5">
-          <Typography variant="h5" color="blue-gray" className="">
+          <Typography variant="h5" className="text-black font-bold">
             Total:
           </Typography>
-          <Typography variant="small" color="blue" className="font-bold">
-            ${carrito.reduce((total, item) => total + item.precio * item.cantidad, 0).toFixed(2)}
+          <Typography variant="small" className="font-bold text-blue-700 ">
+            S/.{carrito.reduce((total, item) => total + item.precio * item.cantidad, 0).toFixed(2)}
           </Typography>
         </div>
         <div className="mt-4 flex justify-between">
           <Link to="/resumenCompra">
-            <button className="mt-4 w-64 bg-purple-900 text-white hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400  dark:hover:bg-purple-500 dark:focus:ring-purple-900">
+            <button className="mt-4 w-64 text-white hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400  dark:hover:bg-purple-500 dark:focus:ring-purple-900">
               Ir al carrito
             </button>
           </Link>
-          <button onClick={ () =>{datosGuardados()}} className="border border-purple-800 mt-4 text-purple-900 hover:text-white  hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
+          <button onClick={() => { datosGuardados() }} className="border border-purple-800 mt-4 text-purple-900 hover:text-white  hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
             Guardar
           </button>
         </div>
