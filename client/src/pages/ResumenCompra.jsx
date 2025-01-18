@@ -19,7 +19,6 @@ const ResumenCompra = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // Aquí puedes manejar el envío del formulario
     toggleModal();
   };
 
